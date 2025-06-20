@@ -9,4 +9,4 @@ Trains Smart Models: We use machine learning algorithms like Random Forest and S
 
 Checks Accuracy: The models are evaluated using accuracy, precision, recall, and F1-score to ensure they’re actually doing the job well.
 
-Visualizes the Findings: Charts and graphs help us (and you!) clearly see what’s going on inside the network.
+Visualizes the Findings: Charts and graphs help us and you clearly see what’s going on inside the network.
