@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin-top: 50px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border: none;
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+        .chart-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .no-spam {
+            color: #28a745;
+        }
+        .spam {
+            color: #dc3545;
+        }
+        .chart-container img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Prediction Result</h1>
+        
+        <!-- Display Prediction -->
+        <h3>Predicted FLAG: 
+            <span class="result {% if prediction == '0' %}no-spam{% else %}spam{% endif %}">
+                {% if prediction == 0 %}
+                    No Spam
+                {% else %}
+                    Spam
+                {% endif %}
+            </span>
+        </h3>
+
+        <h2>Input Data</h2>
+        <table class="table table-bordered">
+            <tr><td><b>Avg min between sent tnx:</b></td><td>{{ input_data['Avg min between sent tnx'] }}</td></tr>
+            <tr><td><b>Avg min between received tnx:</b></td><td>{{ input_data['Avg min between received tnx'] }}</td></tr>
+            <tr><td><b>Time Diff between first and last (Mins):</b></td><td>{{ input_data['Time Diff between first and last (Mins)'] }}</td></tr>
+            <tr><td><b>Sent tnx:</b></td><td>{{ input_data['Sent tnx'] }}</td></tr>
+            <tr><td><b>Received Tnx:</b></td><td>{{ input_data['Received Tnx'] }}</td></tr>
+            <tr><td><b>Unique Received From Addresses:</b></td><td>{{ input_data['Unique Received From Addresses'] }}</td></tr>
+            <tr><td><b>Unique Sent To Addresses:</b></td><td>{{ input_data['Unique Sent To Addresses'] }}</td></tr>
+            <tr><td><b>Total transactions (including tnx to create contract):</b></td><td>{{ input_data['total transactions (including tnx to create contract'] }}</td></tr>
+            <tr><td><b>Total Ether sent:</b></td><td>{{ input_data['total Ether sent'] }}</td></tr>
+            <tr><td><b>Total ether received:</b></td><td>{{ input_data['total ether received'] }}</td></tr>
+            <tr><td><b>Total ether balance:</b></td><td>{{ input_data['total ether balance'] }}</td></tr>
+        </table>
+
+        <h2>Generated Charts</h2>
+        <div class="chart-container">
+            <img src="{{ url_for('static', filename='images/flag_distribution.png') }}" alt="Flag Distribution">
+            <img src="{{ url_for('static', filename='images/confusion_matrix.png') }}" alt="Confusion Matrix">
+            <img src="{{ url_for('static', filename='images/pairplot.png') }}" alt="Pairplot">
+            <img src="{{ url_for('static', filename='images/correlation_heatmap.png') }}" alt="Correlation Heatmap">
+            <img src="{{ url_for('static', filename='images/roc_curve.png') }}" alt="ROC Curve">
+            <img src="{{ url_for('static', filename='images/precision_recall_curve.png') }}" alt="Precision-Recall Curve">
+            <img src="{{ url_for('static', filename='images/transactions_scatter.png') }}" alt="Transactions Scatter">
+            <img src="{{ url_for('static', filename='images/boxplot_time_diff.png') }}" alt="Boxplot Time Diff">
+        </div>
+
+        <a href="/" class="btn btn-primary w-100 mt-3">Go Back</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
